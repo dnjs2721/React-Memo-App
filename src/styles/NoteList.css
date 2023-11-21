@@ -1,0 +1,148 @@
+.note-list {
+    padding: 20px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.note-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.note-list-container-title {
+    display: flex;
+    align-items: center;
+}
+
+.note-list-container-title p{
+    margin-left: 3px;
+}
+
+.pin-note-items, .unpin-note-items {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 242px;
+}
+
+.note-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 230px;
+    height: 220px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-item-header-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100px; /* 원하는 길이로 조절하세요 */
+}
+
+.note-item-header-right {
+    display: flex;
+    align-items: center;
+}
+
+.note-item-priority {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.unpin-note-items .note-item-pin {
+    background-color: #3498db;
+}
+
+.pin-note-items .note-item-pin {
+    background-color: #e74c3c;
+}
+
+.note-item-pin {
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.note-item-content-box {
+    margin-top: 10px;
+    height: 100px;
+    overflow-y: auto;
+}
+
+.note-item-content {
+    margin-top: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note-item-tags {
+    display: flex;
+    margin: 4px 0;
+    justify-content: flex-start;
+    overflow-x: auto;
+}
+
+.note-item-tags div {
+    display: flex;
+    padding: 4px;
+    font-size: 11px;
+    margin-right: 2px;
+    background: #eee;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.note-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.note-item-id {
+    font-size: 12px;
+    color: #888;
+}
+
+.note-item-edit-button,
+.note-item-delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.note-item-edit-button {
+    margin-right: 5px;
+}

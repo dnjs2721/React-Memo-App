@@ -1,0 +1,127 @@
+/* src/styles/CreateNoteModal.css */
+
+.create-note-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-note-modal-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.create-note-modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.create-note-modal-content-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.create-note-modal input,
+.create-note-modal textarea {
+    padding: 10px;
+    margin: 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.create-note-modal textarea {
+    min-height: 100px;
+    min-width: 400px;
+}
+
+.create-note-modal-tags {
+    display: flex;
+    margin: 10px 10px;
+    justify-content: flex-start;
+}
+
+.create-note-modal-tag {
+    display: flex;
+    padding: 6px;
+    margin-right: 8px;
+    background: #eee;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.create-note-modal-tag span {
+    padding: 0;
+    margin: 0 4px;
+    font-size: 10px;
+}
+
+.create-note-modal-tag button {
+    margin: 0 4px;
+    padding: 0;
+    border: none;
+}
+
+.create-note-modal-props {
+    display: flex;
+    margin: 20px 10px 10px;
+    justify-content: space-between;
+}
+
+.create-note-modal-props select {
+    margin-left: 5px;
+}
+
+.create-note-modal-add, .create-note-modal-cancel {
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-note-modal-select {
+    color: #fff;
+    background-color: #95a5a6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-note-modal-select:hover {
+    background-color: #7f8c8d;
+}
+
+.create-note-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.create-note-modal-add {
+    background-color: #4caf50;
+}
+
+.create-note-modal-cancel {
+    background-color: #e74c3c;
+}
+
+.create-note-modal-add:hover {
+    background: #45a049;
+}
+
+.create-note-modal-cancel:hover {
+    background-color: #c0392b;
+}
+
+/* Add styles for the SelectTagModal if needed */
+
