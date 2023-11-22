@@ -1,43 +1,50 @@
-// src/components/CreateNoteModal.tsx
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNote, addNoteToTag } from '../features/note/noteSlice';
-import { Tag, NoteTag } from '../models';
-import SelectTagModal from './SelectTagModal'; // 새로운 모달 컴포넌트를 가져왔어요
-import '../styles/CreateNoteModal.css'
+import {addNoteToTag, removeNoteFromTag, updateNote} from '../features/note/noteSlice';
+import { Tag, NoteTag, Note } from '../models';
+import SelectTagModal from './SelectTagModal';
+import '../styles/EditNoteModal.css';
 
-interface CreateNoteModalProps {
-    selectedTag: Tag;
+interface EditNoteModalProps {
+    selectedNote: Note;
+    noteTags: NoteTag[];
+    tags: Tag[];
     onClose: () => void;
 }
 
-const CreateNoteModal: React.FC<CreateNoteModalProps> = ({ onClose, selectedTag }) => {
+const EditNoteModal: React.FC<EditNoteModalProps> = ({ onClose, selectedNote, noteTags, tags }) => {
     const dispatch = useDispatch();
 
-    const [newNoteTitle, setNewNoteTitle] = useState('');
-    const [newNoteContent, setNewNoteContent] = useState('');
+    const [newNoteTitle, setNewNoteTitle] = useState(selectedNote.title);
+    const [newNoteContent, setNewNoteContent] = useState(selectedNote.content);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([selectedTag]);
-    const [priority, setPriority] = useState<string>('Low');
-    const [color, setColor] = useState<string>('White');
+    const [priority, setPriority] = useState<string>(selectedNote.priority);
+    const [color, setColor] = useState<string>(selectedNote.color);
+    const [selectedTags, setSelectedTags] = useState<Tag[]>(
+        tags.filter((tag) => noteTags.some((noteTag) => noteTag.tagId === tag.id))
+    );
 
-    const handleAddNote = () => {
-        const newNote = {
-            id: Date.now(),
-            title: newNoteTitle || `New Note`,
-            content: newNoteContent || 'Type your content here',
-            priority: priority,
-            color: color,
+    const handleEditNote = () => {
+        const editedNote: Note = {
+            id: selectedNote.id,
+            title: newNoteTitle || selectedNote.title,
+            content: newNoteContent || selectedNote.content,
+            priority,
+            color,
             editTime: Date.now(),
         };
 
-        dispatch(addNote(newNote));
+        dispatch(updateNote(editedNote));
 
-        // 수정: 선택된 태그에 새로운 노트를 추가할 수도 있어요.
+        // 기존에 연결된 태그들을 먼저 제거
+        noteTags
+            .filter((nt) => nt.noteId === selectedNote.id)
+            .forEach((nt) => dispatch(removeNoteFromTag(nt)));
+
+        // 수정된 태그들을 새로 추가
         selectedTags.forEach((tag) => {
             const noteTag: NoteTag = {
-                noteId: newNote.id,
+                noteId: editedNote.id,
                 tagId: tag.id,
             };
             dispatch(addNoteToTag(noteTag));
@@ -46,7 +53,7 @@ const CreateNoteModal: React.FC<CreateNoteModalProps> = ({ onClose, selectedTag 
         // 입력값 초기화하고 모달 닫기
         setNewNoteTitle('');
         setNewNoteContent('');
-        setSelectedTags([]); // 수정: 선택된 태그들 초기화
+        setSelectedTags([]);
         onClose();
     };
 
@@ -59,23 +66,19 @@ const CreateNoteModal: React.FC<CreateNoteModalProps> = ({ onClose, selectedTag 
     };
 
     const handleTagSelection = (tag: Tag) => {
-        // 수정: 선택된 태그 처리
         // 이미 선택된 태그라면 제외하고, 아니라면 추가
         if (selectedTags.some((selectedTag) => selectedTag.id === tag.id)) {
             setSelectedTags((prevSelectedTags) => prevSelectedTags.filter((t) => t.id !== tag.id));
         } else {
             setSelectedTags((prevSelectedTags) => [...prevSelectedTags, tag]);
         }
-
-        // setIsModalOpen(false);
     };
 
-
     return (
-        <div className={"create-note-modal"}>
-            <div className="create-note-modal-container">
-                <h2>Add New Note</h2>
-                <div className={"create-note-modal-content-box"}>
+        <div className="edit-note-modal">
+            <div className="edit-note-modal-container">
+                <h2>Edit Note</h2>
+                <div className="edit-note-modal-content-box">
                     <input
                         type="text"
                         placeholder="Title"
@@ -83,29 +86,26 @@ const CreateNoteModal: React.FC<CreateNoteModalProps> = ({ onClose, selectedTag 
                         onChange={(e) => setNewNoteTitle(e.target.value)}
                     />
                     <textarea
-                        // className={"create-note-modal-content"}
                         style={{ background: getBackgroundColor(color) }}
                         placeholder="Content"
                         value={newNoteContent}
                         onChange={(e) => setNewNoteContent(e.target.value)}
                     />
                 </div>
-                <div className={"create-note-modal-tags"}>
-                    {/* 수정: 선택된 태그들의 이름을 보여줌 */}
+                <div className="edit-note-modal-tags">
                     {selectedTags.map((tag) => (
-                        <div
-                            className={"create-note-modal-tag"}
-                            key={tag.id}
-                        >
+                        <div className="edit-note-modal-tag" key={tag.id}>
                             <span>{tag.name}</span>
                             <button onClick={() => handleTagSelection(tag)}>x</button>
                         </div>
                     ))}
                 </div>
-                <div className={"create-note-modal-props"}>
-                    <button className={"create-note-modal-select"} onClick={openModal}>Add Tag</button>
+                <div className="edit-note-modal-props">
+                    <button className="edit-note-modal-select" onClick={openModal}>
+                        Add Tag
+                    </button>
                     <label>
-                        베경색 :
+                        Color:
                         <select value={color} onChange={(e) => setColor(e.target.value)}>
                             <option value="White">White</option>
                             <option value="Red">Red</option>
@@ -114,25 +114,29 @@ const CreateNoteModal: React.FC<CreateNoteModalProps> = ({ onClose, selectedTag 
                         </select>
                     </label>
                     <label>
-                        우선순위 :
+                        Priority:
                         <select value={priority} onChange={(e) => setPriority(e.target.value)}>
                             <option value="High">High</option>
                             <option value="Low">Low</option>
                         </select>
                     </label>
                 </div>
-                <div className={"create-note-modal-buttons"}>
-                    <button className={"create-note-modal-add"} onClick={handleAddNote}>Add Note</button>
-                    <button className={"create-note-modal-cancel"} onClick={onClose}>Cancel</button>
+                <div className="edit-note-modal-buttons">
+                    <button className="edit-note-modal-add" onClick={handleEditNote}>
+                        Edit Note
+                    </button>
+                    <button className="edit-note-modal-cancel" onClick={onClose}>
+                        Cancel
+                    </button>
                 </div>
 
-                {isModalOpen && <SelectTagModal onClose={closeModal} onSelectTag={handleTagSelection} selectedTags={selectedTags}/>}
+                {isModalOpen && <SelectTagModal onClose={closeModal} onSelectTag={handleTagSelection} selectedTags={selectedTags} />}
             </div>
         </div>
     );
 };
 
-export default CreateNoteModal;
+export default EditNoteModal;
 
 function getBackgroundColor(color: string) {
     switch (color) {

@@ -1,0 +1,89 @@
+.sort-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-modal-container {
+    background: #fff;
+    width: 180px;
+    height: 230px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: start;
+}
+
+.sort-modal-container-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.sort-modal-container-header-left {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.sort-modal-container-header-left h4 {
+    margin: 0;
+}
+
+.sort-modal-container-header-left button {
+    border: none;
+    width: 40px;
+    height: 20px;
+    margin-left: 10px;
+    color: red;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+.sort-modal-container-header-right {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.sort-modal-container-values {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.sort-modal-container-values p {
+    color: rgb(150, 150, 150);
+    font-size: 12px;
+    margin: 10px 0 10px;
+    padding: 0;
+}
+
+.sort-modal-container-values label {
+    display: flex;
+    font-size: 13px;
+    width: 110px;
+    cursor: pointer;
+}
+
+.sort-modal-container-values input {
+    margin: 0 5px 10px 0;
+    padding: 0;
+    cursor: pointer;
+}

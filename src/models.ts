@@ -2,6 +2,7 @@ export interface Tag {
     id: number;
     name: string;
     pinNotes: any;
+    img: string;
 }
 
 export interface Note {
@@ -10,6 +11,7 @@ export interface Note {
     content: string;
     priority: string;
     color: string;
+    editTime: number;
 }
 
 export interface NoteTag {

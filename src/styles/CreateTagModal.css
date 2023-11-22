@@ -1,4 +1,4 @@
-.select-tag-modal {
+.create-tag-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-.select-tag-modal-container {
+.create-tag-modal-container {
     background: #fff;
     min-width: 250px;
     max-width: 250px;
@@ -20,12 +20,12 @@
     text-align: start;
 }
 
-.select-tag-modal-container-header {
+.create-tag-modal-container-header {
     display: flex;
     justify-content: space-between;
 }
 
-.select-tag-modal-container-header button {
+.create-tag-modal-container-header button {
     display: flex;
     width: 20px;
     height: 20px;
@@ -35,40 +35,39 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    cursor: pointer;
 }
 
-.select-tag-modal-container-newTag {
+.create-tag-modal-container-newTag {
     display: flex;
     justify-content: center;
 }
 
-.select-tag-modal-container-newTag input {
+.create-tag-modal-container-newTag input {
     display: flex;
     flex: 1;
     margin: 0 !important;
     padding: 10px !important;
 }
 
-.select-tag-modal-container-tags {
+.create-tag-modal-container-tags {
     overflow-y: auto;
     max-height: 200px;
 }
 
-.select-tag-modal-container-tag {
+.create-tag-modal-container-tag {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.select-tag-modal-container-tag p {
+.create-tag-modal-container-tag p {
     margin-right: 10px;
     width: 200px;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
-.select-tag-modal-container-tag button {
+.create-tag-modal-container-tag button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,5 +78,4 @@
     font-weight: bold;
     font-size: 1.1rem;
     margin-right: 10px;
-    cursor: pointer;
 }
